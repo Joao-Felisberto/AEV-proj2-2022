@@ -4,6 +4,7 @@ import json
 import os
 
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 
 """
 Ideas:
@@ -20,6 +21,8 @@ Ideas:
 """
 
 app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 routes = {}
 
