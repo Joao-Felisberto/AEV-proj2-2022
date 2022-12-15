@@ -1,10 +1,18 @@
 {
   "/": {
-    "endpointName": "root",
-    "method": "root"
-  },
-  "/dev": {
     "endpointName": "dev",
     "method": "dev"
+  },
+  "/login": {
+    "endpointName": "login",
+    "method": "api_login"
+  },
+  "/sign_in": {
+    "endpointName": "sign_in",
+    "method": "api_sign_in"
+  },
+  "/flagpage": {
+    "endpointName": "flagpage",
+    "method": "flag_page"
   }
 }
