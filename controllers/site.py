@@ -1,8 +1,8 @@
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session
 
-from controllers.TokenClass import Token
 from controllers.database import login
 from util.util import response
+
 
 def root():
     print("working")
@@ -13,8 +13,10 @@ def dev():
     print("dev")
     return f"{open('./static/routes.json').read()}"
 
-def api_sign_in():
-    return render_template('login.html')
+
+def api_sign_in(username='', password=''):
+    print(username, password)
+    return render_template('sign_in.html')
 
 
 def api_login():

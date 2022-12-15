@@ -4,4 +4,3 @@ def login(token, username, password):
         return cookietoken
     else:
         return False
-
