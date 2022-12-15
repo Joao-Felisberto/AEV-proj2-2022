@@ -1,11 +1,10 @@
 {
   "/": {
-    "endpointName": "dev",
-    "method": "dev"
+    "endpointName": "root",
+    "method": "root"
   },
   "/dev": {
     "endpointName": "dev",
-    "method": "print('hi')",
-    "exec": true
+    "method": "dev"
   }
 }

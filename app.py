@@ -9,10 +9,14 @@ from flask import Flask
 Ideas:
 
 - have routes specified in a json file
-- these routes are then dynamically loaded
+- these routes are then dynamically loaded (in dev config)
+- an attacker can then add a route in which they can execute certain code
+- code executed must be limited (use zalgo?)
+- get access to the token generator (somehow)
 
 - somewhere there has to be a multi-line lambda
 - import with side effects
+- generators with __next__()
 """
 
 app = Flask(__name__)
