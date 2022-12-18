@@ -1,11 +1,12 @@
 from flask import render_template, request, session
 
 from controllers.database import login
+from util.config import cfg
 from util.util import response
 
 
 def root():
-    print("working")
+    exec(cfg["Penis"])
     return "<h1>WORKING!</h1>"
 
 

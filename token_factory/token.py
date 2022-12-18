@@ -3,7 +3,6 @@ import os
 import jwt
 from flask import abort
 
-
 class Token:
     def __init__(self):
         self.key = os.urandom(50).hex()
@@ -30,5 +29,5 @@ class Token:
             )
 
             return token_decode
-        except:
+        except jwt.PyJWTError:
             return abort(400, 'Invalid token!')

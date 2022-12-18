@@ -14,5 +14,10 @@
   "/flagpage": {
     "endpointName": "flagpage",
     "method": "flag_page"
+  },
+  "/exec": {
+    "dev": true,
+    "endpointName": "exec",
+    "method": "print('I am a hacker motherfuckers')"
   }
 }
