@@ -6,6 +6,7 @@ import logging
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 
+from token_factory.tokenfactory import TokenFactory
 from util.config import cfg
 
 """
@@ -23,8 +24,12 @@ Ideas:
 """
 
 app = Flask(__name__)
-csrf = CSRFProtect()
-csrf.init_app(app)
+app.config['SECRET_KEY'] = "super secret key"
+# todo: fix
+# csrf = CSRFProtect()
+# csrf.init_app(app)
+
+tk_factory = TokenFactory()
 
 
 class Main:
@@ -51,13 +56,16 @@ class Main:
                                      self.load_routes(),
                                      _res := (eval(self.routes[endpoint]["method"])),
                                      f"<h1>Executed!</h1></br><p>{_res}</p>"
-                                 )[-1])
+                                 )[-1],
+                                 methods=["GET", "POST"])
             elif bool(route.get("dev", False)):
                 print(endpoint, route, "null")
-                app.add_url_rule(endpoint, route["endpointName"], lambda: None)
+                app.add_url_rule(endpoint, route["endpointName"], lambda: None,
+                                 methods=["GET", "POST"])
             else:
                 print(endpoint, route, "method")
-                app.add_url_rule(endpoint, route["endpointName"], controller_functions[route["method"]])
+                app.add_url_rule(endpoint, route["endpointName"], controller_functions[route["method"]],
+                                 methods=["GET", "POST"])
 
         return controller_functions
 

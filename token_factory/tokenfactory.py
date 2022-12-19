@@ -3,7 +3,8 @@ import os
 import jwt
 from flask import abort
 
-class Token:
+
+class TokenFactory:
     def __init__(self):
         self.key = os.urandom(50).hex()
 
@@ -14,7 +15,7 @@ class Token:
                 'username': username,
                 'admin': False
             },
-            self.keykey,
+            self.key,
             algorithm='HS256'
         )
 

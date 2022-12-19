@@ -1,12 +1,12 @@
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect, url_for
 
-from controllers.database import login
+from app import tk_factory
+from database.database import login
 from util.config import cfg
 from util.util import response
 
 
 def root():
-    exec(cfg["Penis"])
     return "<h1>WORKING!</h1>"
 
 
@@ -17,7 +17,22 @@ def dev():
 
 def api_sign_in(username='', password=''):
     print(username, password)
-    return render_template('sign_in.html')
+    if request.method == 'POST':
+        print("POST")
+        # Get the login credentials from the request
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # Authenticate the user
+        user = login(username, password)
+        if user:
+            print(user)
+            # token = user.decode('utf-8')
+            return redirect(url_for('flagpage', token=user))
+        else:
+            return 'Invalid credentials', 401
+    else:
+        # Display the login form
+        return render_template('sign_in.html')
 
 
 def api_login():
@@ -31,7 +46,7 @@ def api_login():
     if not username or not password:
         return response('All fields are required!'), 401
 
-    user = login(token, username, password)
+    user = login(username, password)
 
     if user:
         session['auth'] = user
@@ -40,7 +55,8 @@ def api_login():
 
 
 def flag_page():
-    current_user = token.token_verify(session.get('auth'))
+    token = request.args.get('token')
+    current_user = tk_factory.token_verify(token)
     if current_user['admin']:
         flag = "{THIS_IS_DUMB}"  # This is hardcoded so we don't import os library
         return "<p>" + flag + "</p>"
