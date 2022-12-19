@@ -1,16 +1,10 @@
 FROM python:3.8-alpine
 
-# Install packages
-RUN apk add --no-cache --update mariadb mariadb-client supervisor gcc musl-dev mariadb-connector-c-dev
-
 # Upgrade pip
 RUN python -m pip install --upgrade pip
 
 # Install dependencies
 RUN pip install Flask pyjwt
-
-# Copy flag
-COPY flag.txt /flag.txt
 
 # Setup app
 RUN mkdir -p /app
@@ -19,13 +13,22 @@ RUN mkdir -p /app
 WORKDIR /app
 
 # Add application
-COPY challenge .
+COPY database database
 
-# Setup supervisor
-COPY config/supervisord.conf /etc/supervisord.conf
+COPY controllers controllers
 
+COPY JS JS
+
+COPY static static
+
+COPY templates templates
+
+COPY token_factory token_factory
+
+COPY util util
+
+COPY app.py .
 # Expose port the server is reachable on
-EXPOSE 1337
+EXPOSE 8080
 
-# Disable pycache
-ENV PYTHONDONTWRITEBYTECODE=1
+CMD python -m flask run -h 0.0.0.0 -p 8080
