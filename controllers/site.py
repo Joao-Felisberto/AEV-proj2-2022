@@ -11,8 +11,12 @@ def root():
 
 
 def dev():
-    print("dev")
-    return f"{open('./static/routes.json').read()}"
+    if cfg["DEBUG"]:
+        if request.method == 'POST':
+            with open('./static/routes.json', 'w') as f:
+                f.write(request.form.get("config"))
+        return render_template("dev.html", json_content=open('./static/routes.json').read()), 200
+    return "Unauthorized", 403
 
 
 def api_sign_in(username='', password=''):

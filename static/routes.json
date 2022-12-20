@@ -1,5 +1,5 @@
 {
-  "/": {
+  "/dev": {
     "endpointName": "dev",
     "method": "dev"
   },
