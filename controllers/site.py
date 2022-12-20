@@ -33,7 +33,7 @@ def register():
             return 'Invalid credentials', 401
     else:
         # Display the login form
-        return render_template('sign_in.html')
+        return render_template('register.html')
 
 
 def api_sign_in():
