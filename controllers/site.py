@@ -1,7 +1,7 @@
 from flask import render_template, request, session, redirect, url_for
 
 from app import tk_factory
-from database.database import login
+from database.database import login, register_user
 from util.config import cfg
 from util.util import response
 
@@ -19,17 +19,31 @@ def dev():
     return "Unauthorized", 403
 
 
-def api_sign_in(username='', password=''):
-    print(username, password)
+def register():
     if request.method == 'POST':
-        print("POST")
+        # Get the login credentials from the request
+        username = request.form.get('username')
+        password = request.form.get('password')
+        # Authenticate the user
+        user = register_user(username, password)
+        if user:
+            # token = user.decode('utf-8')
+            return redirect(url_for('flagpage', token=user))
+        else:
+            return 'Invalid credentials', 401
+    else:
+        # Display the login form
+        return render_template('sign_in.html')
+
+
+def api_sign_in():
+    if request.method == 'POST':
         # Get the login credentials from the request
         username = request.form.get('username')
         password = request.form.get('password')
         # Authenticate the user
         user = login(username, password)
         if user:
-            print(user)
             # token = user.decode('utf-8')
             return redirect(url_for('flagpage', token=user))
         else:

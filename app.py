@@ -4,7 +4,6 @@ import json
 import logging
 
 from flask import Flask
-from flask_wtf.csrf import CSRFProtect
 
 from token_factory.tokenfactory import TokenFactory
 from util.config import cfg
@@ -25,14 +24,16 @@ Ideas:
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "super secret key"
+
+
 # todo: fix
 # csrf = CSRFProtect()
 # csrf.init_app(app)
 
-tk_factory = TokenFactory()
-
 
 class Main:
+    tk_factory = TokenFactory()
+
     def __init__(self):
         self.routes = {}
 
@@ -74,4 +75,5 @@ class Main:
             self.routes = json.loads(routesConfig.read())
 
 
+tk_factory = Main.tk_factory
 routes = Main().load_controllers()

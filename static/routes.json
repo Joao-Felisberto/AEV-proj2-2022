@@ -3,13 +3,17 @@
     "endpointName": "dev",
     "method": "dev"
   },
-  "/login": {
+  "/sign_in": {
     "endpointName": "login",
     "method": "api_login"
   },
-  "/sign_in": {
+  "/login": {
     "endpointName": "sign_in",
     "method": "api_sign_in"
+  },
+  "/register": {
+    "endpointName": "register",
+    "method": "register"
   },
   "/flagpage": {
     "endpointName": "flagpage",

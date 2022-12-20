@@ -11,3 +11,12 @@ def login(username, password):
         return cookietoken
     else:
         return False
+
+
+def register_user(username, password):
+    if username not in db:
+        db[username] = password
+        cookietoken = tk_factory.generate_token(username)
+        return cookietoken
+    else:
+        return False
