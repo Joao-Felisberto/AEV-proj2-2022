@@ -76,7 +76,7 @@ def flag_page():
     token = request.args.get('token')
     current_user = tk_factory.token_verify(token)
     if current_user['admin']:
-        flag = "{THIS_IS_DUMB}"  # This is hardcoded so we don't import os library
+        flag = "{LETS_TEST_IN_PROD_WHT_CAN_GO_WONG}"  # This is hardcoded so we don't import os library
         return "<p>" + flag + "</p>"
     else:
         return "<p>This isn't the page you are looking for...!</p>"
