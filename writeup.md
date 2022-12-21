@@ -1,7 +1,7 @@
 # The Problem
 
-> Our team enlisted the intern to make their new website! Their code passes SonarQ's tests, so, it must be secure...
-> right?
+> Our team enlisted the intern to make their new website! 
+> He even added some nice in-house development debugging tools!
 
 # Enumeration
 
